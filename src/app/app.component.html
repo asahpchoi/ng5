@@ -1,0 +1,61 @@
+<div *ngIf="afAuth.authState | async; let user; else showLogin">
+  <h1>Hello {{ user.displayName }}!</h1>
+  <button mat-raised-button (click)="logout()">Logout</button>
+  <div *ngIf="currentGameDoc; then showGame else selectGame">
+  </div>
+</div>
+
+CG:{{currentGame}}
+
+<ng-template #showLogin>
+  <p>Please login.</p>
+  <button mat-raised-button (click)="login()">Login with Google</button>
+</ng-template>
+
+<ng-template #selectGame>
+  <mat-card>
+    JOIN
+    <button mat-raised-button *ngFor="let item of items | async" (click)='pickGame(item)'>{{item.name}}</button>
+    OR
+    <button mat-raised-button (click)='createGame()'>Create New Game
+    </button>
+    <input [(ngModel)]="newGameName">
+
+  </mat-card>
+</ng-template>
+
+<ng-template #showGame>
+  <div *ngIf="currentGameItem">
+  <h2>GAME: {{currentGameItem.name}}</h2>
+  <mat-accordion >
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Personal data
+        </mat-panel-title>
+        <mat-panel-description>
+          Type your name and age
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <input matInput placeholder="Game Name" [(ngModel)]="currentGameItem.name">
+      </mat-form-field>
+
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Self aware panel
+        </mat-panel-title>
+        <mat-panel-description>
+          Currently I am {{panelOpenState ? 'open' : 'closed'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>I'm visible because I am open</p>
+    </mat-expansion-panel>
+    <button mat-raised-button (click)="updateGame()">Update</button>
+  </mat-accordion>
+  </div>
+</ng-template>
