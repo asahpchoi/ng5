@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';      // Add this
 
 @Component({
   selector: 'app-setting',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.getDetail();
+  }
+
+  getDetail() {
+    const id = this.route.snapshot.paramMap.get('roomId');
+    console.log(id);
   }
 
 }
