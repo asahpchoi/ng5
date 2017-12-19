@@ -13,6 +13,12 @@ import { environment } from '../environments/environment';
 import {MatButtonModule, MatCheckboxModule, MatCardModule, MatInputModule} from '@angular/material';
 import {MatExpansionModule} from '@angular/material/expansion'
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { GetRoomNameComponent } from './get-room-name/get-room-name.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { SettingComponent } from './setting/setting.component';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   imports: [
@@ -22,9 +28,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     BrowserAnimationsModule,
     MatButtonModule, MatCheckboxModule, MatCardModule,MatExpansionModule,MatFormFieldModule,MatInputModule,
-    FormsModule
+    MatSnackBarModule,
+    MatToolbarModule,
+    FormsModule,
+    MatDialogModule
   ],
-  declarations: [ AppComponent ],
+  declarations: [ AppComponent, GetRoomNameComponent, SettingComponent, GameComponent ],
+  entryComponents:[GetRoomNameComponent],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {}
