@@ -1,0 +1,28 @@
+[debug] [2017-12-20T11:32:49.972Z] ----------------------------------------------------------------------
+[debug] [2017-12-20T11:32:49.978Z] Command:       C:\Program Files\nodejs\node.exe D:\Users\Asa HP Choi\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy
+[debug] [2017-12-20T11:32:49.979Z] CLI Version:   3.16.0
+[debug] [2017-12-20T11:32:49.979Z] Platform:      win32
+[debug] [2017-12-20T11:32:49.979Z] Node Version:  v6.10.0
+[debug] [2017-12-20T11:32:49.980Z] Time:          Wed Dec 20 2017 19:32:49 GMT+0800 (China Standard Time)
+[debug] [2017-12-20T11:32:49.980Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-12-20T11:32:49.993Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-12-20T11:32:49.993Z] > authorizing via signed-in user
+[debug] [2017-12-20T11:32:49.996Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/auth-b9121  
+  
+ Wed Dec 20 2017 19:32:49 GMT+0800 (China Standard Time)
+[debug] [2017-12-20T11:32:51.310Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-20T11:32:51.311Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/auth-b9121/tokens  
+  
+ Wed Dec 20 2017 19:32:51 GMT+0800 (China Standard Time)
+[debug] [2017-12-20T11:32:52.265Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'auth-b9121'...
+[info] 
+[info] i  deploying hosting
+[info] i  hosting: preparing public directory for upload...
+[debug] [2017-12-20T11:32:54.119Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/auth-b9121/uploads/-L0ngdhw8a1uMpXalFO2?fileCount=12&message=  
+  
+ Wed Dec 20 2017 19:32:54 GMT+0800 (China Standard Time)
+[debug] [2017-12-20T11:32:59.680Z] <<< HTTP RESPONSE 200
+[debug] [2017-12-20T11:32:59.681Z] [hosting] .tgz uploaded successfully, waiting for extraction

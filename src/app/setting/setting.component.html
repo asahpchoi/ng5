@@ -1,3 +1,51 @@
-<p>
-  setting works!
-</p>
+
+<div *ngIf="currentGameItem">
+<mat-form-field>
+  <mat-chip-list [(ngModel)]="selectedUser"  #chipList1>
+    <mat-chip *ngFor="let user of currentGameItem.players" [removable]="true" (remove)="removeUser(user)">
+      {{user.name}}<mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+</mat-form-field>
+
+<button mat-mini-fab (click)="fillPlayers()"><mat-icon>person_add</mat-icon></button>
+
+<mat-accordion >
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        General
+      </mat-panel-title>
+      <mat-panel-description>
+
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-form-field>
+      <input matInput placeholder="Game Name" [(ngModel)]="currentGameItem.name">
+    </mat-form-field>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Game Settings
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-grid-list cols="5" rowHeight="2:1" *ngIf="currentGameItem">
+        <mat-form-field>
+          <input matInput placeholder="Marks" [(ngModel)]="currentGameItem.settings.marks">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="start At" [(ngModel)]="currentGameItem.settings.startAt">
+        </mat-form-field>
+        <mat-form-field *ngFor="let user of currentGameItem.players">
+          <input matInput placeholder="Player Name" [(ngModel)]="user.name">
+        </mat-form-field>
+    </mat-grid-list>
+  </mat-expansion-panel>
+
+</mat-accordion>
+<br>
+<button mat-raised-button  color="primary" (click)="update()"><mat-icon>save</mat-icon></button>
+</div>

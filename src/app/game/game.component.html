@@ -1,3 +1,33 @@
+
+<mat-slide-toggle [(ngModel)]="game.self" (click)="game.loser=null">Self</mat-slide-toggle>
 <p>
-  game works!
-</p>
+
+<mat-button-toggle-group #fan="matButtonToggleGroup" [(ngModel)]="game.fan">
+    <mat-button-toggle value="{{i}}" *ngFor="let i of getArray(10)"
+    [disabled]="i < this.currentGameItem.settings.startAt"
+    >
+      {{i}}
+    </mat-button-toggle>
+</mat-button-toggle-group>
+
+<mat-grid-list cols="2" rowHeight="30px">
+  <mat-grid-tile>Winner</mat-grid-tile>
+  <mat-grid-tile>Loser</mat-grid-tile>
+  <mat-grid-tile rowspan="6">
+    <mat-button-toggle-group #winner="matButtonToggleGroup" [(ngModel)]="game.winner" vertical>
+        <mat-button-toggle value="{{i.id}}" *ngFor="let i of getUsers()">
+          {{i.name}}
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+  </mat-grid-tile>
+  <mat-grid-tile  rowspan="6">
+    <mat-button-toggle-group #loser="matButtonToggleGroup" [(ngModel)]="game.loser" vertical>
+        <mat-button-toggle value="{{i.id}}" *ngFor="let i of getUsers()"
+          [disabled]="i.id == game.winner || game.self">
+          {{i.name}}
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<button mat-raised-button color="primary" (click)="addGame()" [disabled]="!canSave()"><i class="material-icons">add</i></button>

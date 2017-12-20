@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
-import {Subject} from "rxjs/Subject";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/first';
 import { AngularFirestore } from 'angularfire2/firestore';
+import * as _ from "lodash";
 
 import { UserService } from './user.service';
 
@@ -13,7 +14,7 @@ export class GameService {
   public itemsCollection;
   items: Observable<any[]>;
   private currentGameItem = null;
-  currentItem: Subject = new Subject('');
+  currentItem: BehaviorSubject<any> = new BehaviorSubject(0);
 
   constructor(
     private db: AngularFirestore,
@@ -23,7 +24,7 @@ export class GameService {
     this.items = this.itemsCollection.valueChanges();
   }
 
-  getCurrentRoom() : Observable {
+  getCurrentRoom() : Observable<any> {
     return Observable.of(this.currentGameItem);
   }
 
@@ -52,10 +53,27 @@ export class GameService {
     this.itemsCollection = null;
   }
 
+  removeUser(user) {
+    this.currentGameItem.players = this.currentGameItem.players.filter(function(u) { return u !== user })
+    this.updateGame();
+  }
+
+  fillPlayers(NoOfPlayer) {
+    let l = this.currentGameItem.players.length;;
+    for(let i = l; i < NoOfPlayer; i++) {
+      let uid = _.uniqueId();
+      this.currentGameItem.players.push(
+        {
+          id: 'dummyUser' + uid,
+          name: 'Player ' + uid
+        }
+      )
+    }
+    this.updateGame();
+  }
+
   enterRoom(item) {
     let currentGameDoc;
-
-
 
     if (item.id) {
       currentGameDoc =  this.db.collection('games', ref => ref.where('id', '==', item.id));
@@ -76,7 +94,7 @@ export class GameService {
       x => {
         this.currentGameItem = x[0];
         if(this.currentGameItem) {
-          if(!this.currentGameItem .players) {
+          if(!this.currentGameItem.players) {
             this.currentGameItem.players = [];
           }
 

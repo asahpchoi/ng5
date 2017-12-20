@@ -1,8 +1,10 @@
 <div *ngIf="us.getUser() | async; let user; else showLogin">
   <mat-toolbar>
+    <a href="/"><mat-icon>home</mat-icon>
+    </a>
     <div class="header">Hello {{ user.displayName }}</div>
     <div>
-      <button mat-mini-fab (click)="us.logout()">X</button>
+      <button mat-mini-fab (click)="us.logout()"><mat-icon>close</mat-icon></button>
     </div>
   </mat-toolbar>
   <div *ngIf="currentGameItem; then showGame else selectGame">
@@ -11,58 +13,25 @@
 <ng-template #showLogin>
   <p>Please login.</p>
   <button mat-raised-button (click)="us.login()">Login with Google</button>
+  <button mat-raised-button (click)="us.loginFB()">Login with Facebook</button>
 </ng-template>
 
 <ng-template #selectGame>
   <mat-card>
-    <button mat-fab (click)='createGame()'>Create
-    </button>
-    Or join
+
     <button mat-raised-button *ngFor="let item of gs.getRooms() | async" (click)='pickGame(item)'>{{item.name}}</button>
+    <button mat-mini-fab (click)='createGame()'><mat-icon>add</mat-icon>
+    </button>
+
   </mat-card>
 </ng-template>
 
 <ng-template #showGame>
-  <nav>
-    <a routerLink="/setting/{{currentGameItem.id}}">setting</a>
-    <a routerLink="/game/{{currentGameItem.id}}">game</a>
-  </nav>
-  <router-outlet></router-outlet>
-  <div *ngIf="currentGameItem">
-  <h2>GAME: {{currentGameItem.name}}</h2>
-  <div *ngFor="let user of currentGameItem.players">
-    {{user.name}}
-  </div>
-  <mat-accordion >
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Personal data
-        </mat-panel-title>
-        <mat-panel-description>
-          Type your name and age
-        </mat-panel-description>
-      </mat-expansion-panel-header>
 
-      <mat-form-field>
-        <input matInput placeholder="Game Name" [(ngModel)]="currentGameItem.name">
-      </mat-form-field>
-      <button (click)="updateGame()">Update</button>
-      <button (click)="exitRoom()">Exit</button>
-    </mat-expansion-panel>
-    <mat-expansion-panel (opened)="panelOpenState = true"
-                         (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Self aware panel
-        </mat-panel-title>
-        <mat-panel-description>
-          Currently I am {{panelOpenState ? 'open' : 'closed'}}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <p>I'm visible because I am open</p>
-    </mat-expansion-panel>
-    <button mat-raised-button (click)="updateGame()">Update</button>
-  </mat-accordion>
-  </div>
+  <button mat-raised-button routerLink="/setting/{{currentGameItem.id}}"> Settings </button>
+  <button mat-raised-button  routerLink="/game/{{currentGameItem.id}}"> Game </button>
+  <button mat-raised-button  routerLink="/summary/{{currentGameItem.id}}"> Summary </button>
+  <mat-card>
+    <router-outlet></router-outlet>
+  </mat-card>
 </ng-template>

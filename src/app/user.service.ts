@@ -13,6 +13,10 @@ export class UserService {
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
+  loginFB() {
+    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+  }
+
   logout() {
     this.afAuth.auth.signOut();
   }
