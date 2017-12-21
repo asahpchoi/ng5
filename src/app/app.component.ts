@@ -11,6 +11,8 @@ import { RouterOutlet } from '@angular/router';
 import { GameService } from './game.service';
 import { UserService } from './user.service';
 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -28,7 +30,10 @@ export class AppComponent {
     this.gs.currentItem.subscribe(
       x => this.currentGameItem = x
     );
+
   }
+
+
 
   openSnackBar(message: string) {
     console.log(message);

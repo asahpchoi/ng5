@@ -3,12 +3,21 @@
 <p>
 
 <mat-button-toggle-group #fan="matButtonToggleGroup" [(ngModel)]="game.fan">
-    <mat-button-toggle value="{{i}}" *ngFor="let i of getArray(10)"
+    <mat-button-toggle value="{{i}}" *ngFor="let i of [1,2,3,4,5]"
     [disabled]="i < this.currentGameItem.settings.startAt"
     >
       {{i}}
     </mat-button-toggle>
 </mat-button-toggle-group>
+
+<mat-button-toggle-group #fan="matButtonToggleGroup" [(ngModel)]="game.fan">
+    <mat-button-toggle value="{{i}}" *ngFor="let i of [6,7,8,9,10]"
+    [disabled]="i < this.currentGameItem.settings.startAt"
+    >
+      {{i}}
+    </mat-button-toggle>
+</mat-button-toggle-group>
+{{game.fan}}
 
 <mat-grid-list cols="2" rowHeight="30px">
   <mat-grid-tile>Winner</mat-grid-tile>

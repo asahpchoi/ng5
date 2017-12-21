@@ -1,8 +1,10 @@
 <div *ngIf="us.getUser() | async; let user; else showLogin">
   <mat-toolbar>
-    <a href="/"><mat-icon>home</mat-icon>
-    </a>
-    <div class="header">Hello {{ user.displayName }}</div>
+
+ <button mat-icon-button (click)="gs.exitRoom()">
+  <mat-icon aria-label="E ">home</mat-icon>
+</button>
+    <div class="header">{{ user.displayName }}</div>
     <div>
       <button mat-mini-fab (click)="us.logout()"><mat-icon>close</mat-icon></button>
     </div>
@@ -10,12 +12,13 @@
   <div *ngIf="currentGameItem; then showGame else selectGame">
   </div>
 </div>
+
 <ng-template #showLogin>
   <p>Please login.</p>
   <button mat-raised-button (click)="us.login()">Login with Google</button>
   <button mat-raised-button (click)="us.loginFB()">Login with Facebook</button>
-</ng-template>
 
+</ng-template>
 <ng-template #selectGame>
   <mat-card>
 
@@ -25,7 +28,6 @@
 
   </mat-card>
 </ng-template>
-
 <ng-template #showGame>
 
   <button mat-raised-button routerLink="/setting/{{currentGameItem.id}}"> Settings </button>
@@ -35,3 +37,4 @@
     <router-outlet></router-outlet>
   </mat-card>
 </ng-template>
+ 

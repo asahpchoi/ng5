@@ -3,8 +3,10 @@
     {{u.name}} : {{getUserSummary(u.id)}}
   </mat-grid-tile>
 </mat-grid-list>
-
-<button mat-raised-button (click)='getResults()'>Show Detail</button>
+<div class="actionbutton">
+  <button mat-button (click)='getResults()'><i class="material-icons">expand_more</i></button>
+</div>
+<div id="chart"></div>
 <mat-table #table [dataSource]="dataSource">
 
   <!--- Note that these columns can be defined in any order.
