@@ -100,6 +100,7 @@ export class GameService {
 
           this.us.getUser().first().subscribe(
             x => {
+              console.log(x);
               let existingUser = this.currentGameItem.players.filter(
                   u => u.id == x.uid
               ).length > 0;
@@ -114,7 +115,8 @@ export class GameService {
                 this.currentGameItem.players.push(
                   {
                     name: x.displayName,
-                    id: x.uid
+                    id: x.uid,
+                    photoURL: x.photoURL
                   }
                 );
                 this.updateGame();

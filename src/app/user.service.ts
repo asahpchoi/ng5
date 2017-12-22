@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class UserService {
   isGuest = false;
+  guestInfo = null;
+
 
   constructor(
       private afAuth: AngularFireAuth,
@@ -22,7 +24,6 @@ export class UserService {
 
   loginGuest() {
     this.isGuest = true;
-
   }
 
   logout() {
@@ -32,11 +33,16 @@ export class UserService {
 
 
   getUser() {
-    let uid = _.uniqueId();
-    let guestUsers = Observable.of({
-      uid: uid,
-      displayName: 'Player' + uid
-    });
-    return this.isGuest?guestUsers:this.afAuth.authState;
+    if(this.isGuest) {
+      if(!this.guestInfo) {
+        let uid = _.uniqueId();
+        this.guestInfo = Observable.of({
+          uid: uid,
+          displayName: 'Player ' + uid
+        });
+      }
+      return this.guestInfo;
+    }
+    return this.afAuth.authState;
   }
 }

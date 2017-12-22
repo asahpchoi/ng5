@@ -4,7 +4,10 @@
  <button mat-icon-button (click)="gs.exitRoom()">
   <mat-icon aria-label="E ">home</mat-icon>
 </button>
-    <div class="header">{{ user.displayName }}</div>
+    <div class="header">{{ user.displayName }}
+    <img src="{{user.photoURL}}" width="40px">
+  </div>
+
     <div>
       <button mat-mini-fab (click)="us.logout()"><mat-icon>close</mat-icon></button>
     </div>
@@ -17,7 +20,7 @@
   <p>Please login.</p>
   <button mat-raised-button (click)="us.login()">Login with Google</button>
   <button mat-raised-button (click)="us.loginFB()">Login with Facebook</button>
-  <button mat-raised-button (click)="us.guest()">Guest login</button>
+  <button mat-raised-button (click)="us.loginGuest()">Guest login</button>
 
 </ng-template>
 <ng-template #selectGame>
